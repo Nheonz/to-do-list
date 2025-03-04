@@ -1,6 +1,6 @@
 import TodoList from "/Users/Juan/Desktop/v01/todo-list/components/todolist";
 
-const Home: React.FC = () => {
+export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg">
@@ -9,6 +9,4 @@ const Home: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Home;
+}
