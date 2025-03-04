@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import TodoItem from "./todoitem";
 
@@ -41,7 +43,7 @@ const TodoList = () => {
           className="border p-2 rounded w-full"
         />
         <button onClick={handleAddTodo} className="mt-2 btn btn-primary w-full">
-          Add Todo
+          Agregar Tarea
         </button>
       </div>
       {todos.map((todo) => (
@@ -51,6 +53,8 @@ const TodoList = () => {
           onToggleComplete={handleToggleComplete}
           onDelete={handleDelete}
         />
+        // Aquí, mapeamos todas las tareas y las pasamos al componente TodoItem;
+        //  para que cada tarea sea representada de forma independiente
       ))}
     </div>
   );
