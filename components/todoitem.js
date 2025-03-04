@@ -16,5 +16,37 @@ const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
     if (editedText.trim() !== "") {
       todo.text = editedText; // Actualiza el texto
     }
+    setIsEditing(false); // Una vez se edita la tarea, cambia el estado  sale del modo edicion
   };
+
+  return (
+    // <--- Renderizado del componente --->
+    <div className="flex items-center justify-between p-4 bg-white border-b">
+      <div className="flex items-center">
+        <input // Es un chebox que se marca si la tarea esta completada, se llama la funcion, pasando el id de la tarea, lo que permite cambiar su estado
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => ontogglecompelte(todo.id)}
+          className="mr-4"
+        />
+
+        {isEditing ? ( // Edicion de la tarea, si es true, se muestra el campo de texto para editar
+          <input
+            type="text"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+            className="border p-2 rounded"
+          />
+        ) : (
+          <span // Si es false, solo se muestra el texto de la tarea, si esta completada se mostrara con una linea tachada
+            className={`flex-1 ${
+              todo.completed ? "line-through text-gray-400" : ""
+            }`}
+          >
+            {todo.text}
+          </span>
+        )}
+      </div>
+    </div>
+  );
 };
