@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Contiene todas las tareas
+import React, { useState } from "react";
 import TodoItem from "./todoitem";
 
 const TodoList = () => {
@@ -30,6 +30,30 @@ const TodoList = () => {
   const handleDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id)); // Elimina la tarea por id
   };
+
+  return (
+    <div className="max-w-lg mx-auto">
+      <div className="mb-4">
+        <input
+          type="text"
+          value={newTodoText}
+          onChange={(e) => setNewTodoText(e.target.value)}
+          className="border p-2 rounded w-full"
+        />
+        <button onClick={handleAddTodo} className="mt-2 btn btn-primary w-full">
+          Add Todo
+        </button>
+      </div>
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onToggleComplete={handleToggleComplete}
+          onDelete={handleDelete}
+        />
+      ))}
+    </div>
+  );
 };
 
-export default todolist;
+export default TodoList;

@@ -47,6 +47,22 @@ const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
           </span>
         )}
       </div>
+      <div className="flex space-x-2">
+        {isEditing ? (
+          <button onClick={handleSave} className="btn btn-primary">
+            Save
+          </button>
+        ) : (
+          <button onClick={handleEdit} className="btn btn-primary">
+            Edit
+          </button>
+        )}
+        <button onClick={() => onDelete(todo.id)} className="btn btn-danger">
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
+
+export default TodoItem;
