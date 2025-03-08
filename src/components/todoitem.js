@@ -1,5 +1,7 @@
+"use client";
+
 // <--- Importacion de React y useState --->
-import { useState } from "reacts";
+import { useState } from "react";
 
 // <--- Definicion de componente todoitem --->
 const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
@@ -47,6 +49,23 @@ const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
           </span>
         )}
       </div>
+      <div className="flex space-x-2">
+        {isEditing ? ( // <--- Botones para editar, guardar y eliminar: Si la tarea está en modo de edición;
+          //  (isEditing es true), se muestra un botón para guardar los cambios --->
+          <button onClick={handleSave} className="btn btn-primary">
+            Guardar
+          </button>
+        ) : (
+          <button onClick={handleEdit} className="btn btn-primary">
+            Editar
+          </button>
+        )}
+        <button onClick={() => onDelete(todo.id)} className="btn btn-danger">
+          Eliminar
+        </button>
+      </div>
     </div>
   );
 };
+
+export default todoitem;
