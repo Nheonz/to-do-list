@@ -5,8 +5,9 @@ import TodoItem from "./todoitem";
 import TodoForm from "./todoform";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]); //Contiene todas las tareas
+  const [todos, setTodos] = useState([]); // Contiene todas las tareas
   const [newTodoText, setNewTodoText] = useState(""); // El texto que un usuario escribe para agregar una nueva tarea
+  const [isOpen, setIsOpen] = useState(true); // Estado para controlar si la lista está abierta o cerrada
 
   // <--- Esta función agrega una nueva tarea al arreglo "todos" y luego limpia el campo de texto --->
   const handleAddTodo = () => {
@@ -45,8 +46,22 @@ const TodoList = () => {
         setNewTodoText={setNewTodoText}
       />
 
-      {/* Lista de tareas */}
-      <div className="mt-6 space-y-4">
+      {/* Botón para abrir y cerrar la lista de tareas */}
+      <button
+        onClick={() => setIsOpen(!isOpen)} // Cambia el estado de isOpen al hacer clic
+        className="mt-4 p-2 bg-blue-500 text-white rounded"
+      >
+        {isOpen ? "Cerrar Lista" : "Abrir Lista"}{" "}
+        {/* Texto que cambia dependiendo del estado */}
+      </button>
+
+      {/* Lista de tareas con animación */}
+      <div
+        className={`transition-all duration-500 ease-in-out overflow-hidden mt-4 ${
+          isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {/* Mapear todas las tareas y mostrarlas en el componente TodoItem */}
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
