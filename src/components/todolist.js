@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TodoItem from "./todoitem";
+import TodoForm from "./todoform";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]); //Contiene todas las tareas
@@ -33,29 +34,28 @@ const TodoList = () => {
     setTodos(todos.filter((todo) => todo.id !== id)); // Elimina la tarea por id
   };
 
+  // Aquí, mapeamos todas las tareas y las pasamos al componente TodoItem;
+  //  para que cada tarea sea representada de forma independiente
   return (
-    <div className="max-w-lg mx-auto">
-      <div className="mb-4">
-        <input
-          type="text"
-          value={newTodoText}
-          onChange={(e) => setNewTodoText(e.target.value)}
-          className="border p-2 rounded w-full"
-        />
-        <button onClick={handleAddTodo} className="mt-2 btn btn-primary w-full">
-          Agregar Tarea
-        </button>
+    <div className="max-w-4xl mx-auto px-4 py-6">
+      {/* Formulario de agregar tarea */}
+      <TodoForm
+        onAddTodo={handleAddTodo}
+        newTodoText={newTodoText}
+        setNewTodoText={setNewTodoText}
+      />
+
+      {/* Lista de tareas */}
+      <div className="mt-6 space-y-4">
+        {todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onToggleComplete={handleToggleComplete}
+            ondelete={handleDelete}
+          />
+        ))}
       </div>
-      {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          onToggleComplete={handleToggleComplete}
-          onDelete={handleDelete}
-        />
-        // Aquí, mapeamos todas las tareas y las pasamos al componente TodoItem;
-        //  para que cada tarea sea representada de forma independiente
-      ))}
     </div>
   );
 };

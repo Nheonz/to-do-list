@@ -1,10 +1,12 @@
 "use client";
 
 // <--- Importacion de React y useState --->
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import TodoForm from "./todoform";
+import TodoList from "./todolist";
 
 // <--- Definicion de componente todoitem --->
-const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
+const todoitem = ({ todo, onToggleComplete, ondelete }) => {
   // Estados locales con useState
   const [isEditing, setIsEditing] = useState(false); // Este estado indica si estamos en modo edicion para la tarea
   const [editedText, setEditedText] = useState(todo.text); // Es el texto de la tarea minetras se esta editando. Se inicializa con el texto original de la tarea (todo.text)
@@ -28,7 +30,7 @@ const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
         <input // Es un chebox que se marca si la tarea esta completada, se llama la funcion, pasando el id de la tarea, lo que permite cambiar su estado
           type="checkbox"
           checked={todo.completed}
-          onChange={() => ontogglecompelte(todo.id)}
+          onChange={() => onToggleComplete(todo.id)}
           className="mr-4"
         />
 
@@ -60,7 +62,7 @@ const todoitem = ({ todo, ontogglecompelte, ondelete }) => {
             Editar
           </button>
         )}
-        <button onClick={() => onDelete(todo.id)} className="btn btn-danger">
+        <button onClick={() => ondelete(todo.id)} className="btn btn-danger">
           Eliminar
         </button>
       </div>
